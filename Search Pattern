@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+        vector <int> search(string pat, string txt)
+        {
+            //code here
+            vector<int> ans;
+            int n = txt.length();
+            int m = pat.length();
+            int i = 0, j = 0;
+            
+            while(i<n)
+            {
+                if(txt[i]==pat[j])
+                {
+                    int k = i;
+                    while(j<m)
+                    {
+                        if(txt[k]!=pat[j])
+                        {
+                            j=0;
+                            break;
+                        }
+                        k++;
+                        j++;
+                    }
+                    if(j!=0)
+                    {
+                        ans.push_back(i+1);
+                        j=0;
+                    }
+                }
+                i++;
+            }
+            return ans;
+        }
+     
+};
