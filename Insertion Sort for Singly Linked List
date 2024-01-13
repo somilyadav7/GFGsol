@@ -1,0 +1,34 @@
+    Node* insertionSort(struct Node* head)
+    {
+        //code here
+        Node *ans = new Node(-1);
+        ans->next = head;
+        
+        Node *prev = head;
+        Node *cur = head->next;
+        
+        if(head==NULL || head->next==NULL)
+            return head;
+        
+        while(cur)
+        {
+            if(prev->data<cur->data)
+            {
+                cur = cur->next;
+                prev = prev->next;
+                continue;
+            }
+            Node * temp = ans;
+            while(temp->next->data<cur->data)
+            {
+                temp = temp->next;
+            }
+            prev->next = cur->next;
+            cur->next = temp->next;
+            temp->next = cur;
+            cur = prev->next;
+        }
+        return ans->next;
+    }
+    
+};
