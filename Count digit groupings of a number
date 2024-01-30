@@ -1,0 +1,24 @@
+class Solution{
+	public:
+	int help(string str, int index, int preSum, vector<vector<int>> &dp){
+	    if(index==str.length()) return 1;
+	    if(dp[index][preSum]!=-1)   return dp[index][preSum];
+	    int curSum = 0, ans = 0;
+	    for(int i=index; i<str.length(); i++)
+	    {
+	        curSum+=str[i]-'0';
+	        if(curSum>=preSum)
+	        {
+	            ans+=help(str,i+1,curSum,dp);
+	        }
+	    }
+	    return dp[index][preSum]=ans;
+	}
+	
+	int TotalCount(string str){
+	    // Code here
+	    int n = str.length();
+	    vector<vector<int>> dp(n,vector<int>(901,-1));
+	    return help(str,0,0,dp);
+	}
+};
