@@ -1,0 +1,37 @@
+class Solution{
+    public:;
+        
+    // A[]: input array
+    // N: size of array
+    // Function to find the maximum index difference.
+    int maxIndexDiff(int a[], int n) 
+    { 
+        // Your code here
+        int maxi=-1, ans=0;
+        vector<int> right_max(n,0);
+        for(int i=n-1; i>=0; i--)
+        {
+            if(a[i]>maxi)
+            {
+                right_max[i]=a[i];
+                maxi=a[i];
+            }
+            else{
+                right_max[i]=maxi;
+            }
+        }
+        int i=0, j=0;
+        while(i<n && j<n)
+        {
+            if(a[i]<=right_max[j])
+            {
+                ans=max(ans,j-i);
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+        return ans;
+    }
+};
