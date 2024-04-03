@@ -1,0 +1,35 @@
+class Solution
+{
+    public:
+    
+    void help(Node *root, int s, vector<Node *> &path)
+    {
+        if(root==NULL)
+            return;
+        path.push_back(root);
+        if(root->data==s)
+            return;
+        help(root->left,s,path);
+        if(!path.empty() && path.back()->data==s)
+            return;
+        help(root->right,s,path);
+        if(!path.empty() && path.back()->data==s)
+            return;
+        path.pop_back();
+    }
+    
+    /*You are required to complete below function */
+    int kthCommonAncestor(Node *root, int k,int x, int y)
+    {
+        // your code goes here
+        vector<Node *> path1, path2;
+        help(root,x,path1);
+        help(root,y,path2);
+        int i=0;
+        while(i<path1.size() && i<path2.size() && path1[i]==path2[i])
+            i++;
+        if(i-k<0)
+            return -1;
+        return path1[i-k]->data;
+    }
+};
