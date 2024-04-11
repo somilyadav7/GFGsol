@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    // function to convert a given Gray equivalent n to Binary equivalent.
+    
+    int grayToBinary(int n)
+    {
+        
+        // Your code here
+        if(n<=1)
+            return n;
+        vector<int> bin;
+        while(n)
+        {
+            bin.push_back(n&1);
+            n=n>>1;
+        }
+        int x=bin.size();
+        int xo=bin[x-1];
+        for(int i=x-2; i>=0; i--)
+        {
+            xo=xo^bin[i];
+            bin[i]=xo;
+        }
+        int temp=0;
+        for(int i=0; i<x; i++)
+        {
+            temp=temp+(bin[i]*pow(2,i));
+        }
+        return temp;
+    }
+};
