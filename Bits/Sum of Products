@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    long long pairAndSum(int n, long long arr[]) {
+        // code here
+        long long ans=0, p=1;
+        for(int i=0; i<32; i++)
+        {
+            long long oneCount=0;
+            for(int j=0; j<n; j++)
+            {
+                if(arr[j]&1)
+                    oneCount++;
+                arr[j]=arr[j]>>1;
+            }
+            oneCount--;
+            ans+=(oneCount*(oneCount+1))/2 * p;
+            p*=2;
+        }
+        return ans;
+    }
+};
