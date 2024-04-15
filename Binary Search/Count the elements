@@ -1,0 +1,50 @@
+class Solution {
+  public:
+    int findUpperBound(vector<int> &b, int val)
+    {
+        int low=0, high=b.size();
+        while(low<high)
+        {
+            int mid=low+(high-low)/2;
+            if(b[mid]<=val)
+                low=mid+1;
+            else
+                high=mid;
+        }
+        return low;
+    }
+  
+    vector<int> countElements(vector<int> &a, vector<int> &b, int n, vector<int> &query, int q) 
+    {
+        // Your code goes here;
+        vector<int> ans;
+        sort(b.begin(),b.end());
+        for(int i=0; i<q; i++)
+        {
+            int x=query[i];
+            int temp=a[x];
+            int idx=findUpperBound(b,temp);
+            ans.push_back(idx);
+        }
+        return ans;
+    }
+};
+
+
+C++ Solution || Upper Bound || TC - O(N log N) & SC - O(1)
+vector<int> countElements(vector<int> &a, vector<int> &b, int n, vector<int> &query,
+                              int q) {
+        vector<int> ans;
+        sort(b.begin(), b.end());
+        
+        for(int i=0 ;i<query.size() ;i++){
+            
+            int index = query[i];
+            int val = a[index];
+            int cnt = upper_bound(b.begin(), b.end(), val) - b.begin();
+            
+            ans.push_back(cnt);
+        }
+        
+        return ans;
+    }
