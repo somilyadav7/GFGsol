@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    int minimizeDifference(int n, int k, vector<int> &arr) {
+        // code here
+        vector<int> rg_min(n,0), rg_max(n,0);
+        rg_min[n-1]=arr[n-1];
+        rg_max[n-1]=arr[n-1];
+        int mini=INT_MAX, maxi=INT_MIN, diff=INT_MAX;
+        for(int i=n-2; i>=0; i--)
+        {
+            rg_min[i]=min(rg_min[i+1],arr[i]);
+            rg_max[i]=max(rg_max[i+1],arr[i]);
+        }
+        for(int i=k,j=-1; i<n+1; i++,j++)
+        {
+            if(j>=0)
+            {
+                mini=min(mini,arr[j]);
+                maxi=max(maxi,arr[j]);
+            }
+            int temp1=mini, temp2=maxi;
+            if(i<n)
+            {
+                temp1=min(temp1,rg_min[i]);
+                temp2=max(temp2,rg_max[i]);                
+            }
+            diff=min(diff,temp2-temp1);
+        }
+        return diff;
+    }
+};
