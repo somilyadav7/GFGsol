@@ -1,0 +1,22 @@
+    void threeWayPartition(vector<int>& array,int a, int b)
+    {
+        // code here
+        int n=array.size();
+        int i=0, k=0, j=n-1;
+        while(k<=j && i<j)
+        {
+            if(array[k]<a)
+            {
+                swap(array[k],array[i]);
+                i++;
+                k++;
+            }
+            else if(array[k]>b)
+            {
+                swap(array[k],array[j]);
+                j--;
+            }
+            else
+                k++;
+        }
+    }
