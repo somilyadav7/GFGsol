@@ -1,0 +1,42 @@
+//Normal Matrix multiplication
+class Solution {
+  public:
+    int firstElement(int n) {
+        // code here
+        int mod=1e9+7;
+        int a0=1, a1=1, a2=1, a3=0;
+        long a_0=1, a_1=1, a_2=1, a_3=0;
+        while(n>1)
+        {
+            long a__0=(a0*a_0)+(a1*a_2);
+            long a__1=(a0*a_1)+(a1*a_3);
+            long a__2=(a2*a_0)+(a3*a_2);
+            long a__3=(a2*a_1)+(a3*a_3);
+            a_0=a__0%mod;
+            a_1=a__1%mod;
+            a_2=a__2%mod;
+            a_3=a__3%mod;
+            n--;
+        }
+        return a_2;
+    }
+};
+
+//Logical
+class Solution {
+  public:
+    int firstElement(int n) {
+        // code here
+        int mod=1e9+7;
+        if(n<=2)
+            return 1;
+        int a=1, b=1;
+        for(int i=3; i<=n; i++)
+        {
+            int ans = (a+b)%mod;
+            a=b;
+            b=ans;
+        }
+        return b;
+    }
+};
