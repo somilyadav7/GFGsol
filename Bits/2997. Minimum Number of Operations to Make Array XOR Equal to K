@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        int xo=0,count=0;
+        for(auto &i:nums)
+            xo=xo^i;
+        xo=xo^k;
+        while(xo)
+        {
+            if(xo&1)
+                count++;
+            xo=xo>>1;
+        }
+        return count;
+    }
+};
