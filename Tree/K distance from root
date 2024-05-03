@@ -1,0 +1,26 @@
+class Solution
+{
+    public:
+    // function should print the nodes at k distance from root
+    void help(Node *root, vector<int> &ans, int k, int ind)
+    {
+        if(!root)   
+            return;
+        if(ind==k)
+        {
+            ans.push_back(root->data);
+            return;
+        }
+        help(root->left,ans,k,ind+1);
+        help(root->right,ans,k,ind+1);
+    }
+    
+    vector<int> Kdistance(struct Node *root, int k)
+    {
+      // Your code here
+      vector<int> ans;
+      int ind=0;
+      help(root,ans,k,ind);
+      return ans;
+    }
+};
