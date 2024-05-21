@@ -1,0 +1,66 @@
+class Solution {
+  public:
+    int findClosest(vector<int> arr, int low, int high, int x)
+    {
+        while(low<=high)
+        {
+            if(arr[high]<=x)
+                return high;
+            
+            if(arr[low] >x)
+                return low;
+            
+            int mid = low + (high-low)/2;
+            
+            if(arr[mid]<=x && arr[mid+1]>x)
+                return mid;
+            
+            if(arr[mid] > x){
+                high = mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return -1;
+    }
+    vector<int> printKClosest(vector<int> arr, int n, int k, int x) 
+    {
+        // code here
+        vector<int> ans;
+        int count=0;
+        int l = findClosest(arr, 0, n-1, x); 
+        int r = l+1;
+        
+        if(arr[l]==x)
+            l--;
+        
+        while(l>=0 && r<n && count<k)
+        { 
+            if(x - arr[l] < arr[r]-x)
+            {
+                ans.push_back(arr[l]);
+                l--;
+            }
+            else{
+                ans.push_back(arr[r]);
+                r++;
+            }
+            count++;
+        }
+        while(count<k && l>=0)
+        {
+            ans.push_back(arr[l]);
+            l--; 
+            count++;
+        }
+        while(count<k && r<n)
+        {
+            ans.push_back(arr[r]);
+            r++;
+            count++;
+        }
+        return ans;
+    }
+    
+};
