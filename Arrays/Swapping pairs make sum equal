@@ -47,3 +47,28 @@ class Solution {
         return -1;
     }
 };
+
+
+// Step 1: Calculate the sums of both arrays
+        long long sum1 = accumulate(a, a + n, 0LL);
+        long long sum2 = accumulate(b, b + m, 0LL);
+
+        // Step 2: Check if the difference is even
+        long long diff = sum2 - sum1;
+        if (diff % 2 != 0) {
+            return -1;
+        }
+
+        // Step 3: Use a set to store elements of the second array
+        unordered_set<long long> setB(b, b + m);
+        long long target = diff / 2;
+
+        // Step 4: Iterate through the first array to find a pair
+        for (int i = 0; i < n; ++i) {
+            long long requiredElement = a[i] + target;
+            if (setB.find(requiredElement) != setB.end()) {
+                return 1;
+            }
+        }
+
+        return -1;
