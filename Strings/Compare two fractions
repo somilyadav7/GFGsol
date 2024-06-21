@@ -1,0 +1,49 @@
+You are given a string str containing two fractions a/b and c/d, compare them and return the greater. If they are equal, then return "equal".
+
+Note: The string str contains "a/b, c/d"(fractions are separated by comma(,) & space( )). 
+
+Examples
+
+Input: str = "5/6, 11/45"
+Output: 5/6
+Explanation: 5/6=0.8333 and 11/45=0.2444, So 5/6 is greater fraction.
+Input: str = "8/1, 8/1"
+Output: equal
+Explanation: We can see that both the fractions are same, so we'll return a string "equal".
+Input: str = "10/17, 9/10"
+Output: 9/10
+Explanation: 10/17 = 0.588 & 9/10 = 0.9, so the greater fraction is "9/10".
+Expected Time Complexity: O(len|str|)
+Expected Auxiliary Space: O(1)
+
+class Solution {
+  public:
+    string compareFrac(string str) {
+
+        // Code here
+        istringstream iss(str);
+        string fraction1, fraction2;
+        
+        getline(iss,fraction1,',');
+        iss.ignore(1); //ignore one space;
+        getline(iss,fraction2);
+        
+        double a,b,c,d;
+        char slash;
+        istringstream iss1(fraction1);
+        iss1>>a>>slash>>b;
+        
+        istringstream iss2(fraction2);
+        iss2>>c>>slash>>d;
+        
+        double value1=a/b;
+        double value2=c/d;
+        
+        if(value1>value2)
+            return fraction1;
+        else if(value1<value2)
+            return fraction2;
+        else
+            return "equal";
+    }
+};
