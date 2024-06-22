@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    long long ExtractNumber(string sentence) {
+
+        // code here
+        priority_queue<long long> pq;
+        string word;
+        stringstream ss(sentence);
+        while(getline(ss,word,' '))
+        {
+            if(!isalpha(word[0]))
+                pq.push(stoll(word));
+        }
+        while(!pq.empty())
+        {
+            string str = to_string(pq.top());
+            if(str.find('9')==string::npos)
+                return pq.top();
+            pq.pop();
+        }
+        return -1;
+    }
+};
