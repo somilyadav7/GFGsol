@@ -1,0 +1,34 @@
+Given a Binary Tree. You need to find and return the vertical width of the tree.
+
+Examples :
+
+Input:
+         1
+       /    \
+      2      3
+     / \    /  \
+    4   5  6   7
+            \   \
+             8   9
+Output: 6
+Explanation: The width of a binary tree is
+the number of vertical paths in that tree.
+class Solution {
+  public:
+    void help(Node* root, set<int> &st, int temp)
+    {
+        if(root==NULL)
+            return;
+        st.insert(temp);
+        help(root->left,st,temp-1);
+        help(root->right,st,temp+1);
+    }
+  
+    // Function to find the vertical width of a Binary Tree.
+    int verticalWidth(Node* root) {
+        // code here
+        set<int> st;
+        help(root,st,0);
+        return st.size();
+    }
+};
